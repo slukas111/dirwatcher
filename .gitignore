@@ -1,3 +1,5 @@
 ./nenv 
 ./env
 .vscode
+.DS_Store
+.pyc
