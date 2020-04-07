@@ -5,7 +5,9 @@ import datetime
 import time
 import argparse
 import os
+
 logger = logging.getLogger(__file__)
+exit_flag = False
 
 def watch_directory(args):
     watching_files = {}
@@ -37,7 +39,8 @@ def watch_directory(args):
             break
 
 def create_parser():
-    parser = argparse.ArgumentParser()
+    """Creates parser and sets up commandline options"""
+    parser = argparse.ArgumentParser(description="Watch directory for change")
     parser.add_argument('-e', '--ext', type=str, default='.txt',
                         help='Text file extension to watch') 
     parser.add_argument('-i', '--interval', type=float,
@@ -64,7 +67,16 @@ def main():
 )
     parser = create_parser()
     args = parser.parse_args()
-    watch_directory(args)
+
+    while not exit_flag:
+        try:
+            watch_directory(args)
+        except OSError:
+            logger.error('{} directory does not exist'.format(args.path))
+            time.sleep(args.interval*2)
+        except Exception as e:
+            logger.error('Unhandled exception: {}'.format(e))
+        time.sleep(args.interval)
     uptime = datetime.datetime.now()-app_start_time
     logger.info(
         '\n'
@@ -74,5 +86,7 @@ def main():
         '-------------------------------------------------------------------\n'
         .format(__file__, str(uptime))    
     )
+    logging.shutdown()
+
 if __name__ == '__main__':
     main()
