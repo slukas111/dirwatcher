@@ -8,7 +8,7 @@ import os
 
 exit_flag = False
 
-
+def main():
 
 if __name__ == '__main__':
     main()
