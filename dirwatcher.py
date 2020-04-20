@@ -1,4 +1,4 @@
-__author__="Sasha Lukas + demo"
+__author__ = 'Sasha Lukas + demo + Chris'
 
 import os
 import argparse
