@@ -21,4 +21,8 @@ Have a demonstrable OS signal handler
 Log messages for files with magic text
 Handle and log different exceptions such as file-not-found, directory-not-exist as well as handle and report top-level unknown exceptions so that your program stays alive.
 Include a startup and shutdown banner in your logs and report the total runtime (uptime) within your shutdown log banner.  Please see the hints below if you don't understand what a logging banner is.
-READ THE RUBRIC.
+
+
+Useage: The user can call this program from the command line with several parameters: .txt, .log, -i, --int:, -e, --ext: extension of text file to watch. Time interval between each scan in seconds, Dir: directory to monitor magicword: the word to search for inside of the file
+
+eg. python dirwatcher.py --ext .log --int 2 directory magicword
